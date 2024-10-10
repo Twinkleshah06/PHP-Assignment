@@ -1,0 +1,256 @@
+TASK-1
+
+
+Enter password: ******
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 11
+Server version: 8.0.39 MySQL Community Server - GPL
+
+Copyright (c) 2000, 2024, Oracle and/or its affiliates.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql> use mysql;
+Database changed
+
+mysql> create table employee(emp_id int primary key, first_name varchar(15), last_name varchar(15), salary int, joining_date date, department varchar(20));
+Query OK, 0 rows affected (0.03 sec)
+
+mysql> describe employee;
++--------------+-------------+------+-----+---------+-------+
+| Field        | Type        | Null | Key | Default | Extra |
++--------------+-------------+------+-----+---------+-------+
+| emp_id       | int         | NO   | PRI | NULL    |       |
+| first_name   | varchar(15) | YES  |     | NULL    |       |
+| last_name    | varchar(15) | YES  |     | NULL    |       |
+| salary       | int         | YES  |     | NULL    |       |
+| joining_date | date        | YES  |     | NULL    |       |
+| department   | varchar(20) | YES  |     | NULL    |       |
++--------------+-------------+------+-----+---------+-------+
+6 rows in set (0.02 sec)
+
+mysql> insert into employee values(1, "John", "Abraham", 1000000, '2013-01-01', "Banking");
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into employee values(2, "Michael", "Clerk", 800000, '2013-01-01', "Insurance");
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into employee values(3, "Roy", "Thomas", 700000, '2013-02-01', "Banking");
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into employee values(4, "Tom", "Jose", 600000, '2013-02-01', "Insurance");
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into employee values(5, "Jerry", "Pinto", 650000, '2013-02-01', "Insurance");
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into employee values(6, "Philip", "Mathew", 750000, '2013-01-01', "Services");
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into employee values(7, "Testname1", "123", 650000, '2013-01-01', "Services");
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into employee values(8, "Testname2", "Lname%", 600000, '2013-02-01', "Insurance");
+Query OK, 1 row affected (0.01 sec)
+
+mysql> select * from employee;
++--------+------------+-----------+---------+--------------+------------+
+| emp_id | first_name | last_name | salary  | joining_date | department |
++--------+------------+-----------+---------+--------------+------------+
+|      1 | John       | Abraham   | 1000000 | 2013-01-01   | Banking    |
+|      2 | Michael    | Clerk     |  800000 | 2013-01-01   | Insurance  |
+|      3 | Roy        | Thomas    |  700000 | 2013-02-01   | Banking    |
+|      4 | Tom        | Jose      |  600000 | 2013-02-01   | Insurance  |
+|      5 | Jerry      | Pinto     |  650000 | 2013-02-01   | Insurance  |
+|      6 | Philip     | Mathew    |  750000 | 2013-01-01   | Services   |
+|      7 | Testname1  | 123       |  650000 | 2013-01-01   | Services   |
+|      8 | Testname2  | Lname%    |  600000 | 2013-02-01   | Insurance  |
++--------+------------+-----------+---------+--------------+------------+
+8 rows in set (0.00 sec)
+
+mysql> create table incentives(incentive_id int primary key, employee_ref_id int, incentive_date date, incentive_amt int);
+Query OK, 0 rows affected (0.04 sec)
+
+mysql> describe incentives;
++-----------------+------+------+-----+---------+-------+
+| Field           | Type | Null | Key | Default | Extra |
++-----------------+------+------+-----+---------+-------+
+| incentive_id    | int  | NO   | PRI | NULL    |       |
+| employee_ref_id | int  | YES  |     | NULL    |       |
+| incentive_date  | date | YES  |     | NULL    |       |
+| incentive_amt   | int  | YES  |     | NULL    |       |
++-----------------+------+------+-----+---------+-------+
+4 rows in set (0.00 sec)
+
+mysql> insert into incentives values(1, 1, '2013-02-01', 5000);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into incentives values(2, 2, '2013-02-01', 3000);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into incentives values(3, 3, '2013-02-01', 4000);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into incentives values(4, 1, '2013-01-01', 4500);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into incentives values(5, 2, '2013-01-01', 3500);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> select * from incentives;
++--------------+-----------------+----------------+---------------+
+| incentive_id | employee_ref_id | incentive_date | incentive_amt |
++--------------+-----------------+----------------+---------------+
+|            1 |               1 | 2013-02-01     |          5000 |
+|            2 |               2 | 2013-02-01     |          3000 |
+|            3 |               3 | 2013-02-01     |          4000 |
+|            4 |               1 | 2013-01-01     |          4500 |
+|            5 |               2 | 2013-01-01     |          3500 |
++--------------+-----------------+----------------+---------------+
+5 rows in set (0.00 sec)
+
+mysql> select first_name as "Employee Name" from employee;
++---------------+
+| Employee Name |
++---------------+
+| John          |
+| Michael       |
+| Roy           |
+| Tom           |
+| Jerry         |
+| Philip        |
+| Testname1     |
+| Testname2     |
++---------------+
+8 rows in set (0.00 sec)
+
+mysql> select first_name, joining_date from employee;
++------------+--------------+
+| first_name | joining_date |
++------------+--------------+
+| John       | 2013-01-01   |
+| Michael    | 2013-01-01   |
+| Roy        | 2013-02-01   |
+| Tom        | 2013-02-01   |
+| Jerry      | 2013-02-01   |
+| Philip     | 2013-01-01   |
+| Testname1  | 2013-01-01   |
+| Testname2  | 2013-02-01   |
++------------+--------------+
+8 rows in set (0.00 sec)
+
+mysql> select * from employee order by first_name asc;
++--------+------------+-----------+---------+--------------+------------+
+| emp_id | first_name | last_name | salary  | joining_date | department |
++--------+------------+-----------+---------+--------------+------------+
+|      5 | Jerry      | Pinto     |  650000 | 2013-02-01   | Insurance  |
+|      1 | John       | Abraham   | 1000000 | 2013-01-01   | Banking    |
+|      2 | Michael    | Clerk     |  800000 | 2013-01-01   | Insurance  |
+|      6 | Philip     | Mathew    |  750000 | 2013-01-01   | Services   |
+|      3 | Roy        | Thomas    |  700000 | 2013-02-01   | Banking    |
+|      7 | Testname1  | 123       |  650000 | 2013-01-01   | Services   |
+|      8 | Testname2  | Lname%    |  600000 | 2013-02-01   | Insurance  |
+|      4 | Tom        | Jose      |  600000 | 2013-02-01   | Insurance  |
++--------+------------+-----------+---------+--------------+------------+
+8 rows in set (0.00 sec)
+
+mysql> select * from employee order by salary desc;
++--------+------------+-----------+---------+--------------+------------+
+| emp_id | first_name | last_name | salary  | joining_date | department |
++--------+------------+-----------+---------+--------------+------------+
+|      1 | John       | Abraham   | 1000000 | 2013-01-01   | Banking    |
+|      2 | Michael    | Clerk     |  800000 | 2013-01-01   | Insurance  |
+|      6 | Philip     | Mathew    |  750000 | 2013-01-01   | Services   |
+|      3 | Roy        | Thomas    |  700000 | 2013-02-01   | Banking    |
+|      5 | Jerry      | Pinto     |  650000 | 2013-02-01   | Insurance  |
+|      7 | Testname1  | 123       |  650000 | 2013-01-01   | Services   |
+|      4 | Tom        | Jose      |  600000 | 2013-02-01   | Insurance  |
+|      8 | Testname2  | Lname%    |  600000 | 2013-02-01   | Insurance  |
++--------+------------+-----------+---------+--------------+------------+
+8 rows in set (0.00 sec)
+
+mysql> select * from employee where first_name like '%o%';
++--------+------------+-----------+---------+--------------+------------+
+| emp_id | first_name | last_name | salary  | joining_date | department |
++--------+------------+-----------+---------+--------------+------------+
+|      1 | John       | Abraham   | 1000000 | 2013-01-01   | Banking    |
+|      3 | Roy        | Thomas    |  700000 | 2013-02-01   | Banking    |
+|      4 | Tom        | Jose      |  600000 | 2013-02-01   | Insurance  |
++--------+------------+-----------+---------+--------------+------------+
+3 rows in set (0.00 sec)
+
+mysql> select * from employee where mm = 'january';
+ERROR 1054 (42S22): Unknown column 'mm' in 'where clause'
+mysql> select * from employee where month(joining_date) = 1;
++--------+------------+-----------+---------+--------------+------------+
+| emp_id | first_name | last_name | salary  | joining_date | department |
++--------+------------+-----------+---------+--------------+------------+
+|      1 | John       | Abraham   | 1000000 | 2013-01-01   | Banking    |
+|      2 | Michael    | Clerk     |  800000 | 2013-01-01   | Insurance  |
+|      6 | Philip     | Mathew    |  750000 | 2013-01-01   | Services   |
+|      7 | Testname1  | 123       |  650000 | 2013-01-01   | Services   |
++--------+------------+-----------+---------+--------------+------------+
+4 rows in set (0.00 sec)
+
+mysql> select department, max(salary) from employee order by max(salary) asc;
+ERROR 1140 (42000): In aggregated query without GROUP BY, expression #1 of SELECT list contains nonaggregated column 'mysql.employee.department'; this is incompatible with sql_mode=only_full_group_by
+mysql> select department, max(salary) from employee group by department order by max(salary) asc;
++------------+-------------+
+| department | max(salary) |
++------------+-------------+
+| Services   |      750000 |
+| Insurance  |      800000 |
+| Banking    |     1000000 |
++------------+-------------+
+3 rows in set (0.01 sec)
+
+mysql> select department, sum(salary) from employee group by department orer by salary desc;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'orer by salary desc' at line 1
+mysql> select department, sum(salary) from employee group by department order by salary desc;
+ERROR 1055 (42000): Expression #1 of ORDER BY clause is not in GROUP BY clause and contains nonaggregated column 'mysql.employee.salary' which is not functionally dependent on columns in GROUP BY clause; this is incompatible with sql_mode=only_full_group_by
+mysql> select department, sum(salary) from employee group by department order by sum(salary) desc;
++------------+-------------+
+| department | sum(salary) |
++------------+-------------+
+| Insurance  |     2650000 |
+| Banking    |     1700000 |
+| Services   |     1400000 |
++------------+-------------+
+3 rows in set (0.01 sec)
+
+mysql> select max(salary) from employee where salary < (select max(salary) from employee);
++-------------+
+| max(salary) |
++-------------+
+|      800000 |
++-------------+
+1 row in set (0.01 sec)
+
+mysql> select first_name, last_name, salary from employee;
++------------+-----------+---------+
+| first_name | last_name | salary  |
++------------+-----------+---------+
+| John       | Abraham   | 1000000 |
+| Michael    | Clerk     |  800000 |
+| Roy        | Thomas    |  700000 |
+| Tom        | Jose      |  600000 |
+| Jerry      | Pinto     |  650000 |
+| Philip     | Mathew    |  750000 |
+| Testname1  | 123       |  650000 |
+| Testname2  | Lname%    |  600000 |
++------------+-----------+---------+
+8 rows in set (0.00 sec)
+
+mysql> select max(salary), department from employee group by department;
++-------------+------------+
+| max(salary) | department |
++-------------+------------+
+|     1000000 | Banking    |
+|      800000 | Insurance  |
+|      750000 | Services   |
++-------------+------------+
+3 rows in set (0.00 sec)
