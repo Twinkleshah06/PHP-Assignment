@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Form</title>
+    <link rel="stylesheet" href="./CSS/userForm.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link id="u-page-google-font" rel="stylesheet"
+        href="https://fonts.googleapis.com/css?family=Oswald:200,300,400,500,600,700|Open+Sans:300,300i,400,400i,600,600i,700,700i,800,800i|Roboto+Condensed:300,300i,400,400i,700,700i|Oswald:200,300,400,500,600,700|text-font">
+</head>
+
+<body>
+
+    <div class="form_heading">
+        <h3 class="mb-3">User Detail Form</h3>
+    </div>
+
+    <div class="container container_main mb-3">
+        <form class="form_main">
+            <h5 class="mb-3">Step 1 : Your Details</h5>
+            <div class="row input_div">
+                <label for="name" class="col-lg-4">Name :</label>
+                <input type="text" id="name" class="col-lg-7 border-hidden" placeholder="First and Last name">
+            </div>
+            <br>
+            <div class="row input_div">
+                <label for="mobileNo" class="col-lg-4">Mobile No. :</label>
+                <input type="number" id="mobileNo" class="col-lg-7" placeholder="Eg.+9159878740">
+            </div>
+            <br>
+            <div class="row input_div">
+                <label for="email" class="col-lg-4">Email :</label>
+                <input type="email" id="email" class="col-lg-7" placeholder="Eg.domain.com">
+            </div>
+            <br>
+
+            <h5 class="mb-3">Step 2 : Delivery Address</h5>
+            <div class="row input_div">
+                <label for="addr" class="col-lg-4">Address :</label>
+                <textarea class="col-lg-7" id="addr" rows="3"></textarea>
+            </div>
+            <br>
+            <div class="row input_div">
+                <label for="postcode" class="col-lg-4">Postcode :</label>
+                <input type="number" id="postcode" class="col-lg-7">
+            </div>
+            <br>
+            <div class="row input_div">
+                <label for="country" class="col-lg-4">Country :</label>
+                <input type="text" id="country" class="col-lg-7">
+            </div>
+            <br>
+
+            <h5 class="mb-3">Step 3 : Card Details</h5>
+            <div class="row input_div">
+                <label for="gender" class="labelVal">Card Type :</label>
+                <div class="col-lg-12 p-0 cardcol">
+                    <div class="imgsdiv">
+                        <input type="radio" id="visa" value="visa" name="gender">
+                        <span>
+                            <img src="./Images/visaimg.jpg" alt="visaimg" class="carddetailsimg">
+                        </span>
+                        <label for="visa">Visa</label>
+                    </div>
+                    <div class="imgsdiv">
+                        <input type="radio" id="amex" value="amex" name="gender">
+                        <span>
+                            <img src="./Images/ameximg.png" alt="visaimg" class="carddetailsimg">
+                        </span>
+                        <label for="amex">AmEx</label>
+                    </div>
+                    <div class="imgsdiv">
+                        <input type="radio" id="mastercard" value="mastercard" name="gender">
+                        <span>
+                            <img src="./Images/mastercardimg.webp" alt="visaimg" class="carddetailsimg">
+                        </span>
+                        <label for="mastercard">Master Card</label>
+                    </div>
+                </div>
+                <br>
+            </div>
+            <br>
+            <div class="row input_div">
+                <label for="cardnum" class="col-lg-4">Card Number :</label>
+                <input type="number" id="cardnum" class="col-lg-7">
+            </div>
+            <br>
+            <div class="row input_div">
+                <label for="securitycode" class="col-lg-4">Security Code :</label>
+                <input type="number" id="securitycode" class="col-lg-7">
+            </div>
+            <br>
+            <div class="row input_div">
+                <label for="nameoncard" class="col-lg-4">Name on card :</label>
+                <input type="text" id="nameoncard" class="col-lg-7">
+            </div>
+            <br>
+
+            <div class="form_btndiv">
+                <button type="submit" class="btn_main">BUY IT!</button>
+            </div>
+        </form>
+    </div>
+
+    </div>
+</body>
+
+</html>

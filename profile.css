@@ -1,0 +1,41 @@
+.profile_outer{
+    background-color: purple;
+    padding: 30px;
+}
+.profileimg{
+    width: 80%;
+    border-radius: 50%;
+}
+.img_section{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+}
+.profile_section2{
+    border-left: 1px solid black;
+    border-right: 1px solid black;
+}
+.profile_container{
+    background-color: white;
+}
+.display_ip{
+    display: flex;
+    flex-direction: column;
+}
+.save_btncls{
+    text-align: center;
+}
+.save_btn{
+    background-color: purple;
+    color: white;
+    padding: 7px 10px;
+    border-radius: 4px;
+}
+.experience_cls{
+    display: flex;
+    justify-content:space-between
+}
+.textsize{
+    font-size: 13px;
+}
