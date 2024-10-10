@@ -1,0 +1,332 @@
+TASK 2
+
+mysql> use mysql;
+Database changed
+mysql> create table salesperson(sno int primary key, sname varchar(20), city varchar(20), comm int);
+Query OK, 0 rows affected (0.13 sec)
+
+mysql> describe salesperson;
++-------+-------------+------+-----+---------+-------+
+| Field | Type        | Null | Key | Default | Extra |
++-------+-------------+------+-----+---------+-------+
+| sno   | int         | NO   | PRI | NULL    |       |
+| sname | varchar(20) | YES  |     | NULL    |       |
+| city  | varchar(20) | YES  |     | NULL    |       |
+| comm  | int         | YES  |     | NULL    |       |
++-------+-------------+------+-----+---------+-------+
+4 rows in set (0.03 sec)
+
+mysql> insert into salesperson values(1001, 'peel', 'london', 0.12);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into salesperson values(1002, 'serres', 'san jose', 0.13)
+    -> ^C
+mysql> insert into salesperson values(1002, 'serres', 'san jose', 0.13);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into salesperson values(1003, 'axelrod', 'new york', 0.1);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into salesperson values(1004, 'motika', 'london', 0.11);
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into salesperson values(1007, 'refkin', 'barcelona', 0.15);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> select * from salesperson;
++------+---------+-----------+------+
+| sno  | sname   | city      | comm |
++------+---------+-----------+------+
+| 1001 | peel    | london    |    0 |
+| 1002 | serres  | san jose  |    0 |
+| 1003 | axelrod | new york  |    0 |
+| 1004 | motika  | london    |    0 |
+| 1007 | refkin  | barcelona |    0 |
++------+---------+-----------+------+
+5 rows in set (0.00 sec)
+
+mysql> alter table salesperson modify comm float;
+Query OK, 5 rows affected (0.12 sec)
+Records: 5  Duplicates: 0  Warnings: 0
+
+mysql> select * from salesperson;
++------+---------+-----------+------+
+| sno  | sname   | city      | comm |
++------+---------+-----------+------+
+| 1001 | peel    | london    |    0 |
+| 1002 | serres  | san jose  |    0 |
+| 1003 | axelrod | new york  |    0 |
+| 1004 | motika  | london    |    0 |
+| 1007 | refkin  | barcelona |    0 |
++------+---------+-----------+------+
+5 rows in set (0.00 sec)
+
+mysql> insert into salesperson values(1001, 'peel', 'london', 0.12);
+ERROR 1062 (23000): Duplicate entry '1001' for key 'salesperson.PRIMARY'
+mysql> truncate salesperson;
+Query OK, 0 rows affected (0.04 sec)
+
+mysql> select * from salesperson;
+Empty set (0.00 sec)
+
+mysql> insert into salesperson values(1001, 'peel', 'london', 0.12);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into salesperson values(1002, 'serres', 'san jose', 0.13)
+    -> ^C
+mysql> insert into salesperson values(1002, 'serres', 'san jose', 0.13);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into salesperson values(1003, 'axelrod', 'new york', 0.1);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into salesperson values(1004, 'motika', 'london', 0.11);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into salesperson values(1007, 'refkin', 'barcelona', 0.15);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> select * from salesperson;
++------+---------+-----------+------+
+| sno  | sname   | city      | comm |
++------+---------+-----------+------+
+| 1001 | peel    | london    | 0.12 |
+| 1002 | serres  | san jose  | 0.13 |
+| 1003 | axelrod | new york  |  0.1 |
+| 1004 | motika  | london    | 0.11 |
+| 1007 | refkin  | barcelona | 0.15 |
++------+---------+-----------+------+
+5 rows in set (0.00 sec)
+
+mysql> create table customer(cnm int primary key, cname varchar(20), city varchar(20), rating int, foreign key(sno) references salesperson(sno));
+ERROR 1072 (42000): Key column 'sno' doesn't exist in table
+mysql> create table customer(cnm int primary key, cname varchar(20), city varchar(20), rating int, sno int,  foreign key(sno) references salesperson(sno));
+Query OK, 0 rows affected (0.07 sec)
+
+mysql> describe customer;
++--------+-------------+------+-----+---------+-------+
+| Field  | Type        | Null | Key | Default | Extra |
++--------+-------------+------+-----+---------+-------+
+| cnm    | int         | NO   | PRI | NULL    |       |
+| cname  | varchar(20) | YES  |     | NULL    |       |
+| city   | varchar(20) | YES  |     | NULL    |       |
+| rating | int         | YES  |     | NULL    |       |
+| sno    | int         | YES  | MUL | NULL    |       |
++--------+-------------+------+-----+---------+-------+
+5 rows in set (0.01 sec)
+
+mysql> insert into customer values(201, 'hoffman', 'london', 100, 1001);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into customer values(202, 'glovanne', 'rome', 200, 1003);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into customer values(203, 'liu', 'san jose', 300, 1002);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into customer values(204, 'grass', 'barcelona', 100, 1002);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into customer values(206, 'clemens', 'london', 300, 1007);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into customer values(207, 'pereira', 'rome', 100, 1004);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> select * from customer;
++-----+----------+-----------+--------+------+
+| cnm | cname    | city      | rating | sno  |
++-----+----------+-----------+--------+------+
+| 201 | hoffman  | london    |    100 | 1001 |
+| 202 | glovanne | rome      |    200 | 1003 |
+| 203 | liu      | san jose  |    300 | 1002 |
+| 204 | grass    | barcelona |    100 | 1002 |
+| 206 | clemens  | london    |    300 | 1007 |
+| 207 | pereira  | rome      |    100 | 1004 |
++-----+----------+-----------+--------+------+
+6 rows in set (0.00 sec)
+
+mysql> CREATE TABLE order_table (onm INT PRIMARY KEY, atm FLOAT, ode DATE, cnm INT, sno INT, FOREIGN KEY (cnm) REFERENCES customer(cnm), FOREIGN KEY (sno) REFERENCES salesperson(sno));
+Query OK, 0 rows affected (0.05 sec)
+
+mysql> describe order_table;
++-------+-------+------+-----+---------+-------+
+| Field | Type  | Null | Key | Default | Extra |
++-------+-------+------+-----+---------+-------+
+| onm   | int   | NO   | PRI | NULL    |       |
+| atm   | float | YES  |     | NULL    |       |
+| ode   | date  | YES  |     | NULL    |       |
+| cnm   | int   | YES  | MUL | NULL    |       |
+| sno   | int   | YES  | MUL | NULL    |       |
++-------+-------+------+-----+---------+-------+
+5 rows in set (0.00 sec)
+
+mysql> insert into order_table values(3001, 18.69, '1994-10-03', 201, 1007);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into order_table values(3002, 1900.1, '1994-10-03', 207, 1004);
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into order_table values(3003, 767.19, '1994-10-03', 201, 1001);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into order_table values(3005, 3005, '1994-10-03', 204, 1002);
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into order_table values(3006, 3006, '1994-10-04', 201, 1007);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into order_table values(3007, 3007, '1994-10-05', 204, 1002);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into order_table values(3008, 3008, '1994-10-05', 206, 1001);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into order_table values(3009, 3009, '1994-10-04', 202, 1003);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into order_table values(3010, 3010, '1994-10-06', 204, 1002);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into order_table values(3011, 3011, '1994-10-06', 206, 1001);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> select * from order_table;
++------+--------+------------+------+------+
+| onm  | atm    | ode        | cnm  | sno  |
++------+--------+------------+------+------+
+| 3001 |  18.69 | 1994-10-03 |  201 | 1007 |
+| 3002 | 1900.1 | 1994-10-03 |  207 | 1004 |
+| 3003 | 767.19 | 1994-10-03 |  201 | 1001 |
+| 3005 |   3005 | 1994-10-03 |  204 | 1002 |
+| 3006 |   3006 | 1994-10-04 |  201 | 1007 |
+| 3007 |   3007 | 1994-10-05 |  204 | 1002 |
+| 3008 |   3008 | 1994-10-05 |  206 | 1001 |
+| 3009 |   3009 | 1994-10-04 |  202 | 1003 |
+| 3010 |   3010 | 1994-10-06 |  204 | 1002 |
+| 3011 |   3011 | 1994-10-06 |  206 | 1001 |
++------+--------+------------+------+------+
+10 rows in set (0.00 sec)
+
+mysql> alter table order_table change atm amt float;
+Query OK, 0 rows affected (0.03 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> select * from order_table;
++------+--------+------------+------+------+
+| onm  | amt    | ode        | cnm  | sno  |
++------+--------+------------+------+------+
+| 3001 |  18.69 | 1994-10-03 |  201 | 1007 |
+| 3002 | 1900.1 | 1994-10-03 |  207 | 1004 |
+| 3003 | 767.19 | 1994-10-03 |  201 | 1001 |
+| 3005 |   3005 | 1994-10-03 |  204 | 1002 |
+| 3006 |   3006 | 1994-10-04 |  201 | 1007 |
+| 3007 |   3007 | 1994-10-05 |  204 | 1002 |
+| 3008 |   3008 | 1994-10-05 |  206 | 1001 |
+| 3009 |   3009 | 1994-10-04 |  202 | 1003 |
+| 3010 |   3010 | 1994-10-06 |  204 | 1002 |
+| 3011 |   3011 | 1994-10-06 |  206 | 1001 |
++------+--------+------------+------+------+
+10 rows in set (0.00 sec)
+
+mysql> select * from order_table where amt > $1000;
+ERROR 1054 (42S22): Unknown column '$1000' in 'where clause'
+mysql> select * from order_table where amt > 1000;
++------+--------+------------+------+------+
+| onm  | amt    | ode        | cnm  | sno  |
++------+--------+------------+------+------+
+| 3002 | 1900.1 | 1994-10-03 |  207 | 1004 |
+| 3005 |   3005 | 1994-10-03 |  204 | 1002 |
+| 3006 |   3006 | 1994-10-04 |  201 | 1007 |
+| 3007 |   3007 | 1994-10-05 |  204 | 1002 |
+| 3008 |   3008 | 1994-10-05 |  206 | 1001 |
+| 3009 |   3009 | 1994-10-04 |  202 | 1003 |
+| 3010 |   3010 | 1994-10-06 |  204 | 1002 |
+| 3011 |   3011 | 1994-10-06 |  206 | 1001 |
++------+--------+------------+------+------+
+8 rows in set (0.00 sec)
+
+mysql> select sname, city from salesperson where city = 'london' and comm > 0.10;
++--------+--------+
+| sname  | city   |
++--------+--------+
+| peel   | london |
+| motika | london |
++--------+--------+
+2 rows in set (0.00 sec)
+
+mysql> select sname from salesperson where city = 'barcelona' or city = 'london';
++--------+
+| sname  |
++--------+
+| peel   |
+| motika |
+| refkin |
++--------+
+3 rows in set (0.00 sec)
+
+mysql> select sname from salesperson where comm > 0.10 and comm < 0.12;
++---------+
+| sname   |
++---------+
+| peel    |
+| axelrod |
+| motika  |
++---------+
+3 rows in set (0.00 sec)
+
+mysql> select * from customer where city is null;
+Empty set (0.00 sec)
+
+mysql> select * from order_table where ode between '1994-10-03' and '1994-10-04';
++------+--------+------------+------+------+
+| onm  | amt    | ode        | cnm  | sno  |
++------+--------+------------+------+------+
+| 3001 |  18.69 | 1994-10-03 |  201 | 1007 |
+| 3002 | 1900.1 | 1994-10-03 |  207 | 1004 |
+| 3003 | 767.19 | 1994-10-03 |  201 | 1001 |
+| 3005 |   3005 | 1994-10-03 |  204 | 1002 |
+| 3006 |   3006 | 1994-10-04 |  201 | 1007 |
+| 3009 |   3009 | 1994-10-04 |  202 | 1003 |
++------+--------+------------+------+------+
+6 rows in set (0.00 sec)
+
+mysql> select * from customer where sno = 1001 or sno = 1004;
++-----+---------+--------+--------+------+
+| cnm | cname   | city   | rating | sno  |
++-----+---------+--------+--------+------+
+| 201 | hoffman | london |    100 | 1001 |
+| 207 | pereira | rome   |    100 | 1004 |
++-----+---------+--------+--------+------+
+2 rows in set (0.00 sec)
+
+mysql> select * from customer where cname like 'a%' or cname like 'b%';
+Empty set (0.01 sec)
+
+mysql> select * from customer where (rating > 100) or (city = 'rome');
++-----+----------+----------+--------+------+
+| cnm | cname    | city     | rating | sno  |
++-----+----------+----------+--------+------+
+| 202 | glovanne | rome     |    200 | 1003 |
+| 203 | liu      | san jose |    300 | 1002 |
+| 206 | clemens  | london   |    300 | 1007 |
+| 207 | pereira  | rome     |    100 | 1004 |
++-----+----------+----------+--------+------+
+4 rows in set (0.00 sec)
+
+mysql> select * from order_table where (amt is not null and amt != 0);
++------+--------+------------+------+------+
+| onm  | amt    | ode        | cnm  | sno  |
++------+--------+------------+------+------+
+| 3001 |  18.69 | 1994-10-03 |  201 | 1007 |
+| 3002 | 1900.1 | 1994-10-03 |  207 | 1004 |
+| 3003 | 767.19 | 1994-10-03 |  201 | 1001 |
+| 3005 |   3005 | 1994-10-03 |  204 | 1002 |
+| 3006 |   3006 | 1994-10-04 |  201 | 1007 |
+| 3007 |   3007 | 1994-10-05 |  204 | 1002 |
+| 3008 |   3008 | 1994-10-05 |  206 | 1001 |
+| 3009 |   3009 | 1994-10-04 |  202 | 1003 |
+| 3010 |   3010 | 1994-10-06 |  204 | 1002 |
+| 3011 |   3011 | 1994-10-06 |  206 | 1001 |
++------+--------+------------+------+------+
+10 rows in set (0.00 sec)
